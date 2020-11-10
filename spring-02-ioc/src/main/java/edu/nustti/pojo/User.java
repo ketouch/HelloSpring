@@ -18,6 +18,10 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public User() {
+        System.out.println("测试对象创建的的时间点...");
+    }
+
     @Override
     public String toString() {
         return "User{" +
