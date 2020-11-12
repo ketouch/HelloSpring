@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="addr" class="edu.nustti.entity.Address">
+        <property name="name" value="梅兰东路8号"/>
+    </bean>
+
+    <bean id="student" class="edu.nustti.entity.Student">
+        <!-- 1.普通注入 -->
+        <property name="name" value="张同学"/>
+        <!-- 2.引用注入 -->
+        <property name="address" ref="addr"/>
+        <!-- 3.数组注入 -->
+        <property name="hobby">
+            <array>
+                <value>篮球</value>
+                <value>排球</value>
+                <value>足球</value>
+            </array>
+        </property>
+        <!-- 4.List注入 -->
+        <property name="teachers">
+            <list>
+                <value>王老师</value>
+                <value>李老师</value>
+                <value>赵老师</value>
+            </list>
+        </property>
+        <!-- 5.Set注入 -->
+        <property name="games">
+            <set>
+                <value>密传</value>
+                <value>传奇</value>
+                <value>贪玩蓝月</value>
+            </set>
+        </property>
+        <!-- 6.Map注入 -->
+        <property name="courses">
+            <map>
+                <entry key="1" value="英语"/>
+                <entry key="2" value="数学"/>
+                <entry key="3" value="美术"/>
+            </map>
+        </property>
+        <!-- 7.Properties注入 -->
+        <property name="props">
+            <props>
+                <prop key="driver">com.mysql.cj.jdbc.Driver</prop>
+                <prop key="url">jdbc:mysql://localhost:3306/dbname</prop>
+            </props>
+        </property>
+    </bean>
+
+
+</beans>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- p命名空间代表<property></property>标签，对应类中set方法 -->
+    <bean id="user1" class="edu.nustti.entity.User" p:name="小王" p:age="20"></bean>
+
+    <!-- c命名空间代表<constructor-arg></constructor-arg>标签，对应类的带参构造方法 -->
+    <!-- 前提是要有带参的构造方法 -->
+    <bean id="user2" class="edu.nustti.entity.User" c:name="小刚" c:age="30"></bean>
+
+</beans>
