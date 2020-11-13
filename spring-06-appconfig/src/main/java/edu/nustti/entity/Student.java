@@ -1,22 +1,22 @@
 package edu.nustti.entity;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 /**
  * @author LemonCCC
  * @description
- * @create 2020/11/12  18:00
+ * @create 2020/11/13  9:21
  */
 @Component
-public class User {
-    @Value(value = "张小盟")
+public class Student {
+    @Value("王同学")
     private String name;
-
+    
     @Override
     public String toString() {
-        return "User{" +
+        return "Student{" +
                 "name='" + name + '\'' +
                 '}';
     }

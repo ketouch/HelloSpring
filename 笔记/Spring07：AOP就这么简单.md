@@ -49,7 +49,7 @@ SpringAOP中，通过Advice定义横切逻辑，Spring中支持5种类型的Advi
 
 【重点】使用AOP织入，需要导入一个依赖包！
 
-```
+```xml
 <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
 <dependency>
    <groupId>org.aspectj</groupId>
@@ -64,7 +64,7 @@ SpringAOP中，通过Advice定义横切逻辑，Spring中支持5种类型的Advi
 
 首先编写我们的业务接口和实现类
 
-```
+```java
 public interface UserService {
 
    public void add();
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService{
 
 然后去写我们的增强类 , 我们编写两个 , 一个前置增强 一个后置增强
 
-```
+```java
 public class Log implements MethodBeforeAdvice {
 
    //method : 要执行的目标对象的方法
@@ -129,7 +129,7 @@ public class AfterLog implements AfterReturningAdvice {
 
 最后去spring的文件中注册 , 并实现aop切入实现 , 注意导入约束 .
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -140,14 +140,14 @@ public class AfterLog implements AfterReturningAdvice {
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
    <!--注册bean-->
-   <bean id="userService" class="com.kuang.service.UserServiceImpl"/>
-   <bean id="log" class="com.kuang.log.Log"/>
-   <bean id="afterLog" class="com.kuang.log.AfterLog"/>
+   <bean id="userService" class="edu.nustti.service.UserServiceImpl"/>
+   <bean id="log" class="edu.nustti.log.Log"/>
+   <bean id="afterLog" class="edu.nustti.log.AfterLog"/>
 
    <!--aop的配置-->
    <aop:config>
        <!--切入点 expression:表达式匹配要执行的方法-->
-       <aop:pointcut id="pointcut" expression="execution(* com.kuang.service.UserServiceImpl.*(..))"/>
+       <aop:pointcut id="pointcut" expression="execution(* edu.nustti.service.UserServiceImpl.*(..))"/>
        <!--执行环绕; advice-ref执行方法 . pointcut-ref切入点-->
        <aop:advisor advice-ref="log" pointcut-ref="pointcut"/>
        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
@@ -158,7 +158,7 @@ public class AfterLog implements AfterReturningAdvice {
 
 测试
 
-```
+```java
 public class MyTest {
    @Test
    public void test(){
@@ -183,7 +183,7 @@ Spring的Aop就是将公共的业务 (日志 , 安全等) 和领域业务结合�
 
 第一步 : 写我们自己的一个切入类
 
-```
+```java
 public class DiyPointcut {
 
    public void before(){
@@ -198,16 +198,16 @@ public class DiyPointcut {
 
 去spring中配置
 
-```
+```xml
 <!--第二种方式自定义实现-->
 <!--注册bean-->
-<bean id="diy" class="com.kuang.config.DiyPointcut"/>
+<bean id="diy" class="edu.nustti.config.DiyPointcut"/>
 
 <!--aop的配置-->
 <aop:config>
    <!--第二种方式：使用AOP的标签实现-->
    <aop:aspect ref="diy">
-       <aop:pointcut id="diyPonitcut" expression="execution(* com.kuang.service.UserServiceImpl.*(..))"/>
+       <aop:pointcut id="diyPonitcut" expression="execution(* edu.nustti.service.UserServiceImpl.*(..))"/>
        <aop:before pointcut-ref="diyPonitcut" method="before"/>
        <aop:after pointcut-ref="diyPonitcut" method="after"/>
    </aop:aspect>
@@ -216,7 +216,7 @@ public class DiyPointcut {
 
 测试：
 
-```
+```java
 public class MyTest {
    @Test
    public void test(){
@@ -235,8 +235,8 @@ public class MyTest {
 
 第一步：编写一个注解实现的增强类
 
-```
-package com.kuang.config;
+```java
+package edu.nustti.config;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -246,17 +246,17 @@ import org.aspectj.lang.annotation.Before;
 
 @Aspect
 public class AnnotationPointcut {
-   @Before("execution(* com.kuang.service.UserServiceImpl.*(..))")
+   @Before("execution(* edu.nustti.service.UserServiceImpl.*(..))")
    public void before(){
        System.out.println("---------方法执行前---------");
   }
 
-   @After("execution(* com.kuang.service.UserServiceImpl.*(..))")
+   @After("execution(* edu.nustti.service.UserServiceImpl.*(..))")
    public void after(){
        System.out.println("---------方法执行后---------");
   }
 
-   @Around("execution(* com.kuang.service.UserServiceImpl.*(..))")
+   @Around("execution(* edu.nustti.service.UserServiceImpl.*(..))")
    public void around(ProceedingJoinPoint jp) throws Throwable {
        System.out.println("环绕前");
        System.out.println("签名:"+jp.getSignature());
@@ -270,15 +270,15 @@ public class AnnotationPointcut {
 
 第二步：在Spring配置文件中，注册bean，并增加支持注解的配置
 
-```
+```xml
 <!--第三种方式:注解实现-->
-<bean id="annotationPointcut" class="com.kuang.config.AnnotationPointcut"/>
+<bean id="annotationPointcut" class="edu.nustti.config.AnnotationPointcut"/>
 <aop:aspectj-autoproxy/>
 ```
 
 aop:aspectj-autoproxy：说明
 
-```
+```xml
 通过aop命名空间的<aop:aspectj-autoproxy />声明自动为spring容器中那些配置@aspectJ切面的bean创建代理，织入切面。当然，spring 在内部依旧采用AnnotationAwareAspectJAutoProxyCreator进行自动代理的创建工作，但具体实现的细节已经被<aop:aspectj-autoproxy />隐藏起来了
 
 <aop:aspectj-autoproxy />有一个proxy-target-class属性，默认为false，表示使用jdk动态代理织入增强，当配为<aop:aspectj-autoproxy  poxy-target-class="true"/>时，表示使用CGLib动态代理技术织入增强。不过即使proxy-target-class设置为false，如果目标类没有声明接口，则spring将自动使用CGLib动态代理。

@@ -41,7 +41,7 @@ Spring的自动装配需要从两个角度来实现，或者说是两个操作�
 
 2、新建两个实体类，Cat  Dog  都有一个叫的方法
 
-```
+```java
 public class Cat {
    public void shout() {
        System.out.println("miao~");
@@ -56,7 +56,7 @@ public class Dog {
 
 3、新建一个用户类 User
 
-```
+```java
 public class User {
    private Cat cat;
    private Dog dog;
@@ -66,17 +66,17 @@ public class User {
 
 4、编写Spring配置文件
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-   <bean id="dog" class="com.kuang.pojo.Dog"/>
-   <bean id="cat" class="com.kuang.pojo.Cat"/>
+   <bean id="dog" class="edu.nustti.pojo.Dog"/>
+   <bean id="cat" class="edu.nustti.pojo.Cat"/>
 
-   <bean id="user" class="com.kuang.pojo.User">
+   <bean id="user" class="edu.nustti.pojo.User">
        <property name="cat" ref="cat"/>
        <property name="dog" ref="dog"/>
        <property name="str" value="qinjiang"/>
@@ -86,7 +86,7 @@ public class User {
 
 5、测试
 
-```
+```java
 public class MyTest {
    @Test
    public void testMethodAutowire() {
@@ -114,8 +114,8 @@ public class MyTest {
 
 1、修改bean配置，增加一个属性  autowire="byName"
 
-```
-<bean id="user" class="com.kuang.pojo.User" autowire="byName">
+```xml
+<bean id="user" class="edu.nustti.pojo.User" autowire="byName">
    <property name="str" value="qinjiang"/>
 </bean>
 ```
@@ -156,12 +156,11 @@ NoUniqueBeanDefinitionException
 
 3、在注册一个cat 的bean对象！
 
-```
-<bean id="dog" class="com.kuang.pojo.Dog"/>
-<bean id="cat" class="com.kuang.pojo.Cat"/>
-<bean id="cat2" class="com.kuang.pojo.Cat"/>
-
-<bean id="user" class="com.kuang.pojo.User" autowire="byType">
+```xml
+<bean id="dog" class="edu.nustti.pojo.Dog"/>
+<bean id="cat" class="edu.nustti.pojo.Cat"/>
+<bean id="cat2" class="edu.nustti.pojo.Cat"/>
+<bean id="user" class="edu.nustti.pojo.User" autowire="byType">
    <property name="str" value="qinjiang"/>
 </bean>
 ```
@@ -182,7 +181,7 @@ jdk1.5开始支持注解，spring2.5开始全面支持注解。
 
 1、在spring配置文件中引入context文件头
 
-```
+```xml
 xmlns:context="http://www.springframework.org/schema/context"
 
 http://www.springframework.org/schema/context
@@ -191,7 +190,7 @@ http://www.springframework.org/schema/context/spring-context.xsd
 
 2、开启属性注解支持！
 
-```
+```xml
 <context:annotation-config/>
 ```
 
@@ -206,7 +205,7 @@ http://www.springframework.org/schema/context/spring-context.xsd
 
 1、将User类中的set方法去掉，使用@Autowired注解
 
-```
+```java
 public class User {
    @Autowired
    private Cat cat;
@@ -228,12 +227,12 @@ public class User {
 
 2、此时配置文件内容
 
-```
+```xml
 <context:annotation-config/>
 
-<bean id="dog" class="com.kuang.pojo.Dog"/>
-<bean id="cat" class="com.kuang.pojo.Cat"/>
-<bean id="user" class="com.kuang.pojo.User"/>
+<bean id="dog" class="edu.nustti.pojo.Dog"/>
+<bean id="cat" class="edu.nustti.pojo.Cat"/>
+<bean id="user" class="edu.nustti.pojo.User"/>
 ```
 
 3、测试，成功输出结果！
@@ -242,7 +241,7 @@ public class User {
 
 @Autowired(required=false)  说明：false，对象可以为null；true，对象必须存对象，不能为null。
 
-```
+```java
 //如果允许对象为null，设置required = false,默认为true
 @Autowired(required = false)
 private Cat cat;
@@ -259,18 +258,18 @@ private Cat cat;
 
 1、配置文件修改内容，保证类型存在对象。且名字不为类的默认名字！
 
-```
-<bean id="dog1" class="com.kuang.pojo.Dog"/>
-<bean id="dog2" class="com.kuang.pojo.Dog"/>
-<bean id="cat1" class="com.kuang.pojo.Cat"/>
-<bean id="cat2" class="com.kuang.pojo.Cat"/>
+```xml
+<bean id="dog1" class="edu.nustti.pojo.Dog"/>
+<bean id="dog2" class="edu.nustti.pojo.Dog"/>
+<bean id="cat1" class="edu.nustti.pojo.Cat"/>
+<bean id="cat2" class="edu.nustti.pojo.Cat"/>
 ```
 
 2、没有加Qualifier测试，直接报错
 
 3、在属性上添加Qualifier注解
 
-```
+```java
 @Autowired
 @Qualifier(value = "cat2")
 private Cat cat;
@@ -292,7 +291,7 @@ private Dog dog;
 
 实体类：
 
-```
+```java
 public class User {
    //如果允许对象为null，设置required = false,默认为true
    @Resource(name = "cat2")
@@ -305,26 +304,26 @@ public class User {
 
 beans.xml
 
-```
-<bean id="dog" class="com.kuang.pojo.Dog"/>
-<bean id="cat1" class="com.kuang.pojo.Cat"/>
-<bean id="cat2" class="com.kuang.pojo.Cat"/>
+```xml
+<bean id="dog" class="edu.nustti.pojo.Dog"/>
+<bean id="cat1" class="edu.nustti.pojo.Cat"/>
+<bean id="cat2" class="edu.nustti.pojo.Cat"/>
 
-<bean id="user" class="com.kuang.pojo.User"/>
+<bean id="user" class="edu.nustti.pojo.User"/>
 ```
 
 测试：结果OK
 
 配置文件2：beans.xml ， 删掉cat2
 
-```
-<bean id="dog" class="com.kuang.pojo.Dog"/>
-<bean id="cat1" class="com.kuang.pojo.Cat"/>
+```xml
+<bean id="dog" class="edu.nustti.pojo.Dog"/>
+<bean id="cat1" class="edu.nustti.pojo.Cat"/>
 ```
 
 实体类上只保留注解
 
-```
+```java
 @Resource
 private Cat cat;
 @Resource

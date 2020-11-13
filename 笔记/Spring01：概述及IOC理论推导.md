@@ -40,7 +40,7 @@ GitHub : https://github.com/spring-projects
 
 **3、控制反转 IoC  , 面向切面 Aop**
 
-4、对事物的支持 , 对框架的支持
+4、对事务的支持 , 对框架的支持
 
 .......
 
@@ -83,7 +83,7 @@ Spring 框架是一个分层架构，由 7 个定义良好的模块组成。Spri
 - Spring Cloud是基于Spring Boot实现的；
 - Spring Boot专注于快速、方便集成的单个微服务个体，Spring Cloud关注全局的服务治理框架；
 - Spring Boot使用了约束优于配置的理念，很多集成方案已经帮你选择好了，能不配置就不配置 , Spring Cloud很大的一部分是基于Spring Boot来实现，Spring Boot可以离开Spring Cloud独立使用开发项目，但是Spring Cloud离不开Spring Boot，属于依赖的关系。
-- SpringBoot在SpringClound中起到了承上启下的作用，如果你要学习SpringCloud必须要学习SpringBoot。
+- SpringBoot在SpringCloud中起到了承上启下的作用，如果你要学习SpringCloud必须要学习SpringBoot。
 
 ![img](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
 
@@ -145,7 +145,7 @@ public class UserServiceImpl implements UserService {
 
 5、测试一下
 
-```
+```java
 @Test
 public void test(){
    UserService service = new UserServiceImpl();
@@ -213,7 +213,7 @@ public class UserServiceImpl implements UserService {
 
 现在去我们的测试类里 , 进行测试 ;
 
-```
+```java
 @Test
 public void test(){
    UserServiceImpl service = new UserServiceImpl();

@@ -46,7 +46,7 @@ Address.java
 Student.java
 
 ```java
- package com.kuang.pojo;
+ package edu.nustti.pojo;
  
  import java.util.List;
  import java.util.Map;
@@ -121,14 +121,14 @@ Student.java
 1、**常量注入**
 
 ```xml
- <bean id="student" class="com.kuang.pojo.Student">
+ <bean id="student" class="edu.nustti.pojo.Student">
      <property name="name" value="小明"/>
  </bean>
 ```
 
 测试：
 
-```
+```java
  @Test
  public void test01(){
      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -145,11 +145,11 @@ Student.java
 注意点：这里的值是一个引用，ref
 
 ```xml
- <bean id="addr" class="com.kuang.pojo.Address">
+ <bean id="addr" class="edu.nustti.pojo.Address">
      <property name="address" value="重庆"/>
  </bean>
  
- <bean id="student" class="com.kuang.pojo.Student">
+ <bean id="student" class="edu.nustti.pojo.Student">
      <property name="name" value="小明"/>
      <property name="address" ref="addr"/>
  </bean>
@@ -158,7 +158,7 @@ Student.java
 3、**数组注入**
 
 ```xml
- <bean id="student" class="com.kuang.pojo.Student">
+ <bean id="student" class="edu.nustti.pojo.Student">
      <property name="name" value="小明"/>
      <property name="address" ref="addr"/>
      <property name="books">
@@ -257,19 +257,19 @@ User.java ：【注意：这里没有有参构造器！】
 
 1、P命名空间注入 : 需要在头文件中加入约束文件
 
-```
+```xml
  导入约束 : xmlns:p="http://www.springframework.org/schema/p"
  
  <!--P(属性: properties)命名空间 , 属性依然要设置set方法-->
- <bean id="user" class="com.kuang.pojo.User" p:name="狂神" p:age="18"/>
+ <bean id="user" class="edu.nustti.pojo.User" p:name="狂神" p:age="18"/>
 ```
 
 2、c 命名空间注入 : 需要在头文件中加入约束文件
 
-```
+```xml
  导入约束 : xmlns:c="http://www.springframework.org/schema/c"
  <!--C(构造: Constructor)命名空间 , 属性依然要设置set方法-->
- <bean id="user" class="com.kuang.pojo.User" c:name="狂神" c:age="18"/>
+ <bean id="user" class="edu.nustti.pojo.User" c:name="狂神" c:age="18"/>
 ```
 
 发现问题：爆红了，刚才我们没有写有参构造！
@@ -278,7 +278,7 @@ User.java ：【注意：这里没有有参构造器！】
 
 测试代码：
 
-```
+```java
  @Test
  public void test02(){
      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -307,7 +307,7 @@ User.java ：【注意：这里没有有参构造器！】
 
 测试：
 
-```
+```java
  @Test
  public void test03(){
      ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -321,7 +321,7 @@ User.java ：【注意：这里没有有参构造器！】
 
 当一个bean的作用域为Prototype，表示一个bean定义对应多个对象实例。Prototype作用域的bean会导致在每次对该bean请求（将其注入到另一个bean中，或者以程序的方式调用容器的getBean()方法）时都会创建一个新的bean实例。Prototype是原型类型，它在我们创建容器的时候并没有实例化，而是当我们获取bean的时候才会去创建一个对象，而且我们每次获取到的对象都不是同一个对象。根据经验，对有状态的bean应该使用prototype作用域，而对无状态的bean则应该使用singleton作用域。在XML中将bean定义成prototype，可以这样配置：
 
-```
+```xml
  <bean id="account" class="com.foo.DefaultAccount" scope="prototype"/>  
   或者
  <bean id="account" class="com.foo.DefaultAccount" singleton="false"/>

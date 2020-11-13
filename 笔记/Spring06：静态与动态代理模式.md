@@ -41,7 +41,7 @@
 
 Rent . java 即抽象角色
 
-```
+```java
 //抽象角色：租房
 public interface Rent {
    public void rent();
@@ -50,7 +50,7 @@ public interface Rent {
 
 Host . java 即真实角色
 
-```
+```java
 //真实角色: 房东，房东要出租房子
 public class Host implements Rent{
    public void rent() {
@@ -61,7 +61,7 @@ public class Host implements Rent{
 
 Proxy . java 即代理角色
 
-```
+```java
 //代理角色：中介
 public class Proxy implements Rent {
 
@@ -90,7 +90,7 @@ public class Proxy implements Rent {
 
 Client . java 即客户
 
-```
+```java
 //客户类，一般客户都会去找代理！
 public class Client {
    public static void main(String[] args) {
@@ -129,7 +129,7 @@ public class Client {
 
 1、创建一个抽象角色，比如咋们平时做的用户业务，抽象起来就是增删改查！
 
-```
+```java
 //抽象角色：增删改查业务
 public interface UserService {
    void add();
@@ -141,7 +141,7 @@ public interface UserService {
 
 2、我们需要一个真实对象来完成这些增删改查操作
 
-```
+```java
 //真实对象，完成增删改查操作的人
 public class UserServiceImpl implements UserService {
 
@@ -170,7 +170,7 @@ public class UserServiceImpl implements UserService {
 
 4、设置一个代理类来处理日志！代理角色
 
-```
+```java
 //代理角色，在这里面增加日志的实现
 public class UserServiceProxy implements UserService {
    private UserServiceImpl userService;
@@ -208,7 +208,7 @@ public class UserServiceProxy implements UserService {
 
 5、测试访问类：
 
-```
+```java
 public class Client {
    public static void main(String[] args) {
        //真实业务
@@ -256,7 +256,7 @@ OK，到了现在代理模式大家应该都没有什么问题了，重点大家
 
 ![img](data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg==)
 
-```
+```java
 Object invoke(Object proxy, 方法 method, Object[] args)；
 //参数
 //proxy - 调用该方法的代理实例
@@ -276,7 +276,7 @@ Object invoke(Object proxy, 方法 method, Object[] args)；
 
 ![img](https://mmbiz.qpic.cn/mmbiz_png/uJDAUKrGC7LoeicP1O2nfyA6H0XPa9jML394CqGFmCP1nUlaU9mdLk19o1qIzjicTgDiaPz7ibR371jAo3uNNQ8Qgw/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 
-```
+```java
 //生成代理类
 public Object getProxy(){
    return Proxy.newProxyInstance(this.getClass().getClassLoader(),
@@ -290,7 +290,7 @@ public Object getProxy(){
 
 Rent . java 即抽象角色
 
-```
+```java
 //抽象角色：租房
 public interface Rent {
    public void rent();
@@ -299,7 +299,7 @@ public interface Rent {
 
 Host . java 即真实角色
 
-```
+```java
 //真实角色: 房东，房东要出租房子
 public class Host implements Rent{
    public void rent() {
@@ -310,7 +310,7 @@ public class Host implements Rent{
 
 ProxyInvocationHandler. java 即代理角色
 
-```
+```java
 public class ProxyInvocationHandler implements InvocationHandler {
    private Rent rent;
 
@@ -349,7 +349,7 @@ public class ProxyInvocationHandler implements InvocationHandler {
 
 Client . java
 
-```
+```java
 //租客
 public class Client {
 
@@ -376,7 +376,7 @@ public class Client {
 
 我们也可以编写一个通用的动态代理实现的类！所有的代理对象设置为Object即可！
 
-```
+```java
 public class ProxyInvocationHandler implements InvocationHandler {
    private Object target;
 
@@ -407,7 +407,7 @@ public class ProxyInvocationHandler implements InvocationHandler {
 
 测试！
 
-```
+```java
 public class Test {
    public static void main(String[] args) {
        //真实对象

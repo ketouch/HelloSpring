@@ -43,7 +43,7 @@
 
 ```xml
 <!--指定注解扫描包-->
-<context:component-scan base-package="com.kuang.pojo"/>
+<context:component-scan base-package="edu.nustti.pojo"/>
 ```
 
 2、在指定包下编写类，增加注解
@@ -58,7 +58,7 @@ public class User {
 
 3、测试
 
-```
+```java
 @Test
 public void test(){
    ApplicationContext applicationContext =
@@ -129,11 +129,18 @@ public class User {
 - prototype：多例模式。关闭工厂 ，所有的对象不会销毁。内部的垃圾回收机制会回收
 
 ```java
-@Controller("user")
+@Component//@Controller("user")
 @Scope("prototype")
 public class User {
-   @Value("秦疆")
-   public String name;
+    @Value(value = "张小盟")
+    private String name;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
 ```
 
@@ -199,11 +206,10 @@ public class MyConfig {
 
 3、测试
 
-```
+```java
 @Test
 public void test2(){
-   ApplicationContext applicationContext =
-           new AnnotationConfigApplicationContext(MyConfig.class);
+   ApplicationContext applicationContext = new AnnotationConfigApplicationContext(MyConfig.class);
    Dog dog = (Dog) applicationContext.getBean("dog");
    System.out.println(dog.name);
 }

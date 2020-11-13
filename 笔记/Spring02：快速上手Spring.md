@@ -50,7 +50,7 @@ public class Hello {
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
    <!--bean就是java对象 , 由Spring创建和管理-->
-   <bean id="hello" class="com.kuang.pojo.Hello">
+   <bean id="hello" class="edu.nustti.pojo.Hello">
        <property name="name" value="Spring"/>
    </bean>
 
@@ -59,7 +59,7 @@ public class Hello {
 
 3、我们可以去进行测试了 .
 
-```
+```java
 @Test
 public void test(){
    //解析beans.xml文件 , 生成管理相应的Bean对象
@@ -101,10 +101,10 @@ public void test(){
       xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-   <bean id="MysqlImpl" class="com.kuang.dao.impl.UserDaoMySqlImpl"/>
-   <bean id="OracleImpl" class="com.kuang.dao.impl.UserDaoOracleImpl"/>
+   <bean id="MysqlImpl" class="edu.nustti.dao.impl.UserDaoMySqlImpl"/>
+   <bean id="OracleImpl" class="edu.nustti.dao.impl.UserDaoOracleImpl"/>
 
-   <bean id="ServiceImpl" class="com.kuang.service.impl.UserServiceImpl">
+   <bean id="ServiceImpl" class="edu.nustti.service.impl.UserServiceImpl">
        <!--注意: 这里的name并不是属性 , 而是set方法后面的那部分 , 首字母小写-->
        <!--引用另外一个bean , 不是用value 而是用 ref-->
        <property name="userDao" ref="OracleImpl"/>
@@ -115,7 +115,7 @@ public void test(){
 
 测试！
 
-```
+```java
 @Test
 public void test2(){
    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -160,14 +160,14 @@ public class User {
 
 2、beans.xml
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-   <bean id="user" class="com.kuang.pojo.User">
+   <bean id="user" class="edu.nustti.pojo.User">
        <property name="name" value="kuangshen"/>
    </bean>
 
@@ -176,7 +176,7 @@ public class User {
 
 3、测试类
 
-```
+```java
 @Test
 public void test(){
    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -195,7 +195,7 @@ public void test(){
 
 1、UserT . java
 
-```
+```java
 public class UserT {
 
    private String name;
@@ -217,26 +217,26 @@ public class UserT {
 
 2、beans.xml 有三种方式编写
 
-```
+```xml
 <!-- 第一种根据index参数下标设置 -->
-<bean id="userT" class="com.kuang.pojo.UserT">
+<bean id="userT" class="edu.nustti.pojo.UserT">
    <!-- index指构造方法 , 下标从0开始 -->
    <constructor-arg index="0" value="kuangshen2"/>
 </bean>
 <!-- 第二种根据参数名字设置 -->
-<bean id="userT" class="com.kuang.pojo.UserT">
+<bean id="userT" class="edu.nustti.pojo.UserT">
    <!-- name指参数名 -->
    <constructor-arg name="name" value="kuangshen2"/>
 </bean>
 <!-- 第三种根据参数类型设置 -->
-<bean id="userT" class="com.kuang.pojo.UserT">
+<bean id="userT" class="edu.nustti.pojo.UserT">
    <constructor-arg type="java.lang.String" value="kuangshen2"/>
 </bean>
 ```
 
 3、测试
 
-```
+```java
 @Test
 public void testT(){
    ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
@@ -253,14 +253,14 @@ public void testT(){
 
 alias 设置别名 , 为bean设置别名 , 可以设置多个别名
 
-```
+```xml
 <!--设置别名：在获取Bean的时候可以使用别名获取-->
 <alias name="userT" alias="userNew"/>
 ```
 
 > Bean的配置
 
-```
+```xml
 <!--bean就是java对象,由Spring创建和管理-->
 
 <!--
@@ -271,7 +271,7 @@ alias 设置别名 , 为bean设置别名 , 可以设置多个别名
 
 class是bean的全限定名=包名+类名
 -->
-<bean id="hello" name="hello2 h2,h3;h4" class="com.kuang.pojo.Hello">
+<bean id="hello" name="hello2 h2,h3;h4" class="edu.nustti.pojo.Hello">
    <property name="name" value="Spring"/>
 </bean>
 ```
@@ -280,7 +280,7 @@ class是bean的全限定名=包名+类名
 
 团队的合作通过import来实现 .
 
-```
+```xml
 <import resource="{path}/beans.xml"/>
 ```
 
