@@ -2,8 +2,6 @@ package edu.nustti.jdkproxy;
 
 import org.junit.Test;
 
-import java.lang.reflect.Proxy;
-
 /**
  * @author LemonCCC
  * @description
@@ -13,7 +11,7 @@ public class ClientTest {
     @Test
     public void test() {
         HouseOwner houseOwner = new HouseOwner();
-        RentHouse proxy = (RentHouse) HouseOwnerProxy.getHouseOwnerProxy(houseOwner);
-        proxy.rentHouse();
+        Object proxy = ObjectProxy.getProxyInstance(houseOwner);
+        ((RentHouse) proxy).rentHouse();
     }
 }
