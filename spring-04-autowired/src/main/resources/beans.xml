@@ -8,8 +8,8 @@
         https://www.springframework.org/schema/context/spring-context.xsd">
         <!--开启注解功能-->
         <context:annotation-config/>
-        <bean id="teacher123" class="edu.nustti.entity.Teacher"/>
-        <bean id="teacher456" class="edu.nustti.entity.Teacher"/>
-        <bean id="clazz123" class="edu.nustti.entity.Clazz"/>
-        <bean id="student" class="edu.nustti.entity.Student"/>
+        <bean id="teacher123" class="edu.nustti.service.entity.Teacher"/>
+        <bean id="teacher456" class="edu.nustti.service.entity.Teacher"/>
+        <bean id="clazz123" class="edu.nustti.service.entity.Clazz"/>
+        <bean id="student" class="Student"/>
 </beans>

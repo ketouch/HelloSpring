@@ -261,7 +261,7 @@ User.java ：【注意：这里没有有参构造器！】
  导入约束 : xmlns:p="http://www.springframework.org/schema/p"
  
  <!--P(属性: properties)命名空间 , 属性依然要设置set方法-->
- <bean id="user" class="edu.nustti.pojo.User" p:name="狂神" p:age="18"/>
+ <bean id="user" class="User" p:name="狂神" p:age="18"/>
 ```
 
 2、c 命名空间注入 : 需要在头文件中加入约束文件
@@ -269,7 +269,7 @@ User.java ：【注意：这里没有有参构造器！】
 ```xml
  导入约束 : xmlns:c="http://www.springframework.org/schema/c"
  <!--C(构造: Constructor)命名空间 , 属性依然要设置set方法-->
- <bean id="user" class="edu.nustti.pojo.User" c:name="狂神" c:age="18"/>
+ <bean id="user" class="User" c:name="狂神" c:age="18"/>
 ```
 
 发现问题：爆红了，刚才我们没有写有参构造！

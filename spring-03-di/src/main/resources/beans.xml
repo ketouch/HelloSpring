@@ -4,11 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="addr" class="edu.nustti.entity.Address">
+    <bean id="addr" class="edu.nustti.service.entity.Address">
         <property name="name" value="梅兰东路8号"/>
     </bean>
 
-    <bean id="student" class="edu.nustti.entity.Student">
+    <bean id="student" class="Student">
         <!-- 1.普通注入 -->
         <property name="name" value="张同学"/>
         <!-- 2.引用注入 -->

@@ -76,7 +76,7 @@ public class User {
    <bean id="dog" class="edu.nustti.pojo.Dog"/>
    <bean id="cat" class="edu.nustti.pojo.Cat"/>
 
-   <bean id="user" class="edu.nustti.pojo.User">
+   <bean id="user" class="User">
        <property name="cat" ref="cat"/>
        <property name="dog" ref="dog"/>
        <property name="str" value="qinjiang"/>
@@ -115,7 +115,7 @@ public class MyTest {
 1、修改bean配置，增加一个属性  autowire="byName"
 
 ```xml
-<bean id="user" class="edu.nustti.pojo.User" autowire="byName">
+<bean id="user" class="User" autowire="byName">
    <property name="str" value="qinjiang"/>
 </bean>
 ```
@@ -160,7 +160,7 @@ NoUniqueBeanDefinitionException
 <bean id="dog" class="edu.nustti.pojo.Dog"/>
 <bean id="cat" class="edu.nustti.pojo.Cat"/>
 <bean id="cat2" class="edu.nustti.pojo.Cat"/>
-<bean id="user" class="edu.nustti.pojo.User" autowire="byType">
+<bean id="user" class="User" autowire="byType">
    <property name="str" value="qinjiang"/>
 </bean>
 ```
@@ -232,7 +232,7 @@ public class User {
 
 <bean id="dog" class="edu.nustti.pojo.Dog"/>
 <bean id="cat" class="edu.nustti.pojo.Cat"/>
-<bean id="user" class="edu.nustti.pojo.User"/>
+<bean id="user" class="User"/>
 ```
 
 3、测试，成功输出结果！
@@ -309,7 +309,7 @@ beans.xml
 <bean id="cat1" class="edu.nustti.pojo.Cat"/>
 <bean id="cat2" class="edu.nustti.pojo.Cat"/>
 
-<bean id="user" class="edu.nustti.pojo.User"/>
+<bean id="user" class="User"/>
 ```
 
 测试：结果OK
