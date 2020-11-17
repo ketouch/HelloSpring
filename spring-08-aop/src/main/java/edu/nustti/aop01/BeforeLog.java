@@ -1,6 +1,5 @@
-package edu.nustti.aop;
+package edu.nustti.aop01;
 
-import org.aopalliance.aop.Advice;
 import org.springframework.aop.MethodBeforeAdvice;
 
 import java.lang.reflect.Method;

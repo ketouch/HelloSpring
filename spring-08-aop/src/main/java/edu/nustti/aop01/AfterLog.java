@@ -1,4 +1,4 @@
-package edu.nustti.aop;
+package edu.nustti.aop01;
 
 
 import org.springframework.aop.AfterReturningAdvice;

@@ -9,5 +9,6 @@
         <!--开启注解功能-->
         <context:annotation-config/>
         <!--开启注解扫描-->
-        <context:component-scan base-package="edu.nustti.dao"/>
+        <context:component-scan base-package="edu.nustti.service.dao"/>
+        <!--context:component-scan功能上包含了context:annotation-config-->
 </beans>

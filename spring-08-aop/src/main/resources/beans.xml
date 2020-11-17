@@ -2,23 +2,47 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop
-        https://www.springframework.org/schema/aop/spring-aop.xsd">
+        https://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
 
 
         <bean id="userService" class="edu.nustti.service.UserServiceImpl"/>
-        <bean id="beforeLog" class="edu.nustti.aop.BeforeLog"/>
-        <bean id="afterLog" class="edu.nustti.aop.AfterLog"/>
+        <bean id="beforeLog" class="edu.nustti.aop01.BeforeLog"/>
+        <bean id="afterLog" class="edu.nustti.aop01.AfterLog"/>
 
-        <!--切面配置-->
-        <aop:config>
-                <!-- 配置切入点，就是需要执行AOP操作的方法 -->
-                <aop:pointcut id="pointcut" expression="execution(* edu.nustti.service.*.*(..))"/>
-                <!-- 配置执行AOP操作的方法的前后方法，就比如一个方法要开启事务，这里就配置事务操作 -->
-                <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>
-                <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
-        </aop:config>
+        <!--方法1：Spring API 接口实现-->
+<!--        <aop:config>-->
+<!--                &lt;!&ndash; 配置切入点，就是需要执行AOP操作的方法 &ndash;&gt;-->
+<!--                <aop:pointcut id="pointcut" expression="execution(* edu.nustti.service.*.*(..))"/>-->
+<!--                &lt;!&ndash; 配置执行AOP操作的方法的前后方法，就比如一个方法要开启事务，这里就配置事务操作 &ndash;&gt;-->
+<!--                <aop:advisor advice-ref="beforeLog" pointcut-ref="pointcut"/>-->
+<!--                <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>-->
+<!--        </aop:config>-->
+
+        <!--方法2：定义切面来实现-->
+<!--        <bean id="myPointCut" class="edu.nustti.aop02.MyPointCut"/>-->
+<!--        <aop:config>-->
+<!--                &lt;!&ndash;配置切面&ndash;&gt;-->
+<!--                <aop:aspect ref="myPointCut" >-->
+<!--                        <aop:pointcut id="pointcut" expression="execution(* edu.nustti.service.*.*(..))"/>-->
+<!--                        <aop:before method="before" pointcut-ref="pointcut"/>-->
+<!--                        <aop:after method="after" pointcut-ref="pointcut"/>-->
+<!--                </aop:aspect>-->
+<!--        </aop:config>-->
+
+        <!--方法3：使用注解-->
+<!--        <bean id="annotationPointCut" class="edu.nustti.aop3.AnnotationPointCut"/>-->
+        <!--开启注解自动代理-->
+        <!--开启注解功能 -->
+<!--        <context:annotation-config/>-->
+        <!--开启注解扫描-->
+        <!--context:component-scan功能上包含了context:annotation-config-->
+        <context:component-scan base-package="edu.nustti.aop3"/>
+        <aop:aspectj-autoproxy/>
 </beans>
