@@ -49,13 +49,17 @@
         <!--配置mapper路径-->
         <property name="mapperLocations" value="classpath:edu/nustti/mapper/*.xml"/>
     </bean>
-
+    <!--方法1：
+    spring-mybatis下面有个SqlSessionTemplate实现了SqlSession接口，
+        只需要通过注入SqlSesssionFactory对象就能获取到SqlSession对象-->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory"/>
     </bean>
+    <!--方法2：-->
     <bean id="adminMapper" class="edu.nustti.mapper.AdminMapperImpl">
         <property name="sqlSession" ref="sqlSession"/>
     </bean>
+    <!--方法3：-->
     <!--如果这么配置，那么上面的sqlSession就不需要配置了-->
     <bean id="adminMapper2" class="edu.nustti.mapper.AdminMapperImpl2">
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>

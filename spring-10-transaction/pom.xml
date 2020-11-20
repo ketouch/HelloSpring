@@ -10,8 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.nustti</groupId>
-    <artifactId>spring-09-mybatis</artifactId>
-    <description>Spring整合MyBatis</description>
+    <artifactId>spring-10-transaction</artifactId>
 
     <dependencies>
         <dependency>
@@ -86,5 +85,4 @@
             </resource>
         </resources>
     </build>
-
 </project>
