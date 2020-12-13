@@ -4,6 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userDAO" class="UserDAOImpl"></bean>
+    <bean id="userDAO" class="edu.nustti.service.dao.UserDAOImpl"></bean>
 
 </beans>

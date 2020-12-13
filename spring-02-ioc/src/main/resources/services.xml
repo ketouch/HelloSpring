@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userService" class="UserServiceImpl">
+    <bean id="userService" class="edu.nustti.service.service.UserServiceImpl">
         <property name="userDAO" ref="userDAO"></property>
     </bean>
 
