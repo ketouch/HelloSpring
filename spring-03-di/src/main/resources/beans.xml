@@ -8,7 +8,7 @@
         <property name="name" value="梅兰东路8号"/>
     </bean>
 
-    <bean id="student" class="Student">
+    <bean id="student" class="edu.nustti.service.entity.Student">
         <!-- 1.普通注入 -->
         <property name="name" value="张同学"/>
         <!-- 2.引用注入 -->

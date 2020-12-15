@@ -7,10 +7,10 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- p命名空间代表<property></property>标签，对应类中set方法 -->
-    <bean id="user1" class="User" p:name="小王" p:age="20"></bean>
+    <bean id="user1" class="edu.nustti.service.entity.User" p:name="小王" p:age="20"></bean>
 
     <!-- c命名空间代表<constructor-arg></constructor-arg>标签，对应类的带参构造方法 -->
     <!-- 前提是要有带参的构造方法 -->
-    <bean id="user2" class="User" c:name="小刚" c:age="30"></bean>
+    <bean id="user2" class="edu.nustti.service.entity.User" c:name="小刚" c:age="30"></bean>
 
 </beans>

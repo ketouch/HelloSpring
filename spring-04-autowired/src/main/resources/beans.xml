@@ -11,5 +11,5 @@
         <bean id="teacher123" class="edu.nustti.service.entity.Teacher"/>
         <bean id="teacher456" class="edu.nustti.service.entity.Teacher"/>
         <bean id="clazz123" class="edu.nustti.service.entity.Clazz"/>
-        <bean id="student" class="Student"/>
+        <bean id="student" class="edu.nustti.service.entity.Student"/>
 </beans>
