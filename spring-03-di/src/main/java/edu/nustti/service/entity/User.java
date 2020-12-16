@@ -1,5 +1,8 @@
 package edu.nustti.service.entity;
 
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
+
 /**
  * @author LemonCCC
  * @description p命名空间和c命名空间
@@ -7,10 +10,10 @@ package edu.nustti.service.entity;
  * c命名空间代表<constructor-arg></constructor-arg>标签，对应类的带参构造方法
  * @create 2020/11/12  11:19
  */
-public class User {
+public class User implements EnvironmentAware {
     private String name;
     private Integer age;
-
+    private Environment environment;
     public User() {
     }
 
@@ -41,5 +44,14 @@ public class User {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
+
+    public Environment getEnvironment() {
+        return environment;
     }
 }
